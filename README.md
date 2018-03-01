@@ -7,3 +7,8 @@ python3.6
 
 # 结合定时脚本，定期检查执行时间过长的进程，kill掉
 0 */1 * * * python3 /root/jupyter_timing_killer.py
+
+# notice:
+notebook进程是由jupyter-notebook 母进程所派生。 所以结束任何一个notebook进程之后，会再次被拉起一个新进程。 进程数是不会减少的。
+
+但是，随着一次kill，notebook上次运行的堆栈和对象信息，会被清零。 比如spark脚本读入的DF，创建的application，都会得到释放。
